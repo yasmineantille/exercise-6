@@ -1,0 +1,58 @@
+/*
+   Application Hello World
+
+   Gradle build file for JaCaMo Application
+*/
+
+defaultTasks 'run'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+version '1.0'
+group   'org.jacamo'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+
+    maven { url "https://raw.github.com/jacamo-lang/mvn-repo/master" }
+    //maven { url "http://jacamo.sourceforge.net/maven2" }
+    //maven { url "https://jade.tilab.com/maven/" }
+    //flatDir {  dirs 'lib' }
+}
+
+dependencies {
+    implementation group: 'org.jacamo',     name: 'jacamo' ,   version: '0.9'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/env'
+            srcDir 'src/agt'
+            srcDir 'src/org'
+            srcDir 'src/int'
+            srcDir 'src/java'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+
+task mas (type: JavaExec, dependsOn: 'classes') {
+    description 'runs application for exercise 6'
+    group ' JaCaMo'
+    main = 'jacamo.infra.JaCaMoLauncher'
+    args 'exercise6.jcm'
+    classpath sourceSets.main.runtimeClasspath
+}
+
+
+clean {
+    delete 'bin'
+    delete 'build'
+}
