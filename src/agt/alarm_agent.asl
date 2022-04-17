@@ -9,8 +9,13 @@
   (see failed(AlarmType)).
 */
 best_alarm_type(AlarmType) :-
-  .print("Task 1 - Step 3: Implement the rule for inferring the best ranked alarm type.") &
-  AlarmType = natural_light.
+  // .print("Task 1 - Step 3: Implement the rule for inferring the best ranked alarm type.") &
+  alarm_rank(AlarmType1, Ranking1) &
+  alarm_rank(AlarmType2, Ranking2) &
+  Ranking1 > Ranking2 &
+  not failed(AlarmType1) &
+  .print("Best ranked alarm type: ", AlarmType) &
+  AlarmType = AlarmType1.
 
 
 /* Initial goals */
@@ -101,7 +106,8 @@ best_alarm_type(AlarmType) :-
 */
 -!inform_friend_of(maria) : true <-
   .print("I was not able to wake up Maria with any available method.");
-  .print("Task 1 - Step 4: Implement the behavior for asking the assistant agent how to inform Maria's friend.");
+  // .print("Task 1 - Step 4: Implement the behavior for asking the assistant agent how to inform Maria's friend.");
+  .send(assistant, askHow, {+!inform_friend_of(maria)});
 
   // After the agent asks the assistant agent, it waits and then attempts
   // to inform again Maria's friend.
