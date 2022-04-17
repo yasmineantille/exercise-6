@@ -45,8 +45,10 @@ current_time(8).
 */
 @inform_friend_of
 +!inform_friend_of(maria) : true <-
-  .print("Task 2 - Step 2: Implement the behavior for dweeting Maria's friend." );
-  .print("(Task 2 - Step 1 requires extending the DweetArtifact.)" ).
+  // .print("Task 2 - Step 2: Implement the behavior for dweeting Maria's friend." );
+  // .print("(Task 2 - Step 1 requires extending the DweetArtifact.)" ).
+  makeArtifact("dweet", "tools.DweetArtifact", [], DweetArtId);
+  dweet("Maria's friend, please wake her up.", "Assistant").
 
 
 /* Additional behaviors */
