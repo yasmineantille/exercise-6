@@ -26,7 +26,18 @@ available_offer(wake_up(maria), artificial_light).
 +cfp(Task)[source(Agent)] :
   available_offer(Task, Offer)
 <-
-  .print("Received CALL FOR PROPOSAL for task ", Task, " from ", Agent).
+  .print("Received CALL FOR PROPOSAL for task ", Task, " from ", Agent);
+  .send(Agent, tell, proposal(artificial_light)).
+  // again, general version:
+  // .send(Agent, tell, proposal(Offer)).
+
++acceptProposal(Task)[source(Agent)] :
+  true
+<-
+  .print("Accepted proposal ", Offer);
+  makeArtifact("lamp", "tools.LampArtifact", [], LampId);
+  lamp("on", "Lamp_Controller_Agent");
+  .send(Agent, tell, informDone(Task)).
 
 
 /* Additional behaviors */

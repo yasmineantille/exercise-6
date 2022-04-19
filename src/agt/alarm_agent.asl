@@ -14,8 +14,8 @@ best_alarm_type(AlarmType) :-
   alarm_rank(AlarmType2, Ranking2) &
   Ranking1 > Ranking2 &
   not failed(AlarmType1) &
-  .print("Best ranked alarm type: ", AlarmType) &
-  AlarmType = AlarmType1.
+  AlarmType = AlarmType1 &
+  .print("Best ranked alarm type: ", AlarmType).
 
 
 /* Initial goals */
@@ -51,7 +51,11 @@ best_alarm_type(AlarmType) :-
   to the agent that proposed an offer with the best alarm type.
 */
 @select_bid
-+!select_bid : false <-
++!select_bid :
+  best_alarm_type(AlarmType) & proposal(AlarmType)[source(Agent)]
+<-
+  .print("Sent accept proposal to agent: ", Agent, " for alarm type: ", AlarmType);
+  .send(Agent, tell, acceptProposal(AlarmType));
 
   // After communicating with the agent that sent the best proposal, the agent
   // waits for 5 sec.
