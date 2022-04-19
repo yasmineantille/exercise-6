@@ -27,9 +27,10 @@ available_offer(wake_up(maria), artificial_light).
   available_offer(Task, Offer)
 <-
   .print("Received CALL FOR PROPOSAL for task ", Task, " from ", Agent);
-  .send(Agent, tell, proposal(artificial_light)).
-  // again, general version:
-  // .send(Agent, tell, proposal(Offer)).
+  .send(Agent, tell, proposal(Offer)).
+  // to just send an artificial_light offer block out the above line and uncomment the line below: 
+  //.send(Agent, tell, proposal(artificial_light)).
+
 
 +acceptProposal(Task)[source(Agent)] :
   true

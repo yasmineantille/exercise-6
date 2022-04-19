@@ -27,9 +27,10 @@ available_offer(wake_up(maria), natural_light).
   available_offer(Task, Offer)
 <-
   .print("Received CALL FOR PROPOSAL for task ", Task, " from ", Agent);
-  .send(Agent, tell, proposal(natural_light)).
-  // I guess to generalise this it would also be:
-  // .send(Agent, tell, proposal(Offer)).
+  .send(Agent, tell, proposal(Offer)).
+  // to just send an natural_light offer block out the above line and uncomment the line below:
+  // .send(Agent, tell, proposal(natural_light)).
+
 
 +acceptProposal(Offer)[source(Agent)] :
   true
@@ -37,7 +38,7 @@ available_offer(wake_up(maria), natural_light).
   .print("Accepted proposal ", Offer);
   makeArtifact("blinds", "tools.BlindsArtifact", [], BlindsId);
   blinds("up", "Blinds_Controller_Agent");
-  .send(Agent, tell, informDone(Task)). // Where is informDone from?
+  .send(Agent, tell, informDone(Task)).
 
 
 /* Additional behaviors */

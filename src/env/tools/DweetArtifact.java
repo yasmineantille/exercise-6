@@ -35,13 +35,12 @@ public class DweetArtifact extends Artifact {
 
       try {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        log("Status: " + response.statusCode());
-        log(response.body());
+        log("Dweet Response: " + response.body());
         if (response.statusCode() != 200) {
           failed("Dweet status code: " + response.statusCode());
-        } 
+        }
       } catch (IOException | InterruptedException e) {
-        e.printStackTrace();
+        failed("Dweet could not be sent due to exception: " + e);
       }
   }
 }
